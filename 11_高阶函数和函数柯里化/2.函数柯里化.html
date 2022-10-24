@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>字符串ref</title>
+</head>
+<body>
+    <script type="text/javascript">
+    //     <!-- 函数的柯里化:通过函数调用继续返回函数的方式，实现多次接收参数最后统一处理的函数编码形式。 -->
+    // eg：
+    saveFormData=(dataType)=>{
+        return (event)=>{
+            // dataType是一个变量，作为键值时需要使用[],确保读取变量中的值
+             this.setState({[dataType]: event.target.value})
+        }
+    }
+    </script>
+</body>
+</html> 

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Person {
+            // 属性放在了类的实例对象上
+            sex = 'f';
+            constructor(name, age) {
+                // this指向的是实例对象
+                this.name = name
+                this.age = age
+            }
+
+            // 方法放在了类的原型对象上，供实例使用 
+            speak() {
+                // 通过person实例调用speck时，this是对应的实例对象
+                console.log(`我叫${this.name}， 我今年 ${this.age}岁了`);
+            }
+        }
+        const p1 = new Person('yang', 20)
+        const p2 = new Person('cheng', 21)
+        
+        console.log('p1:', p1);
+        console.log('p2:', p2);
+
+        p1.speak()
+        p2.speak()
+    </script>    
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .header{
+            background-color: orange;
+        }
+    </style>
+</head>
+<body>
+    <!-- 容器 -->
+    <div id="test"></div>
+
+    <!-- REACT ,react核心库-->
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <!-- REACTDOM ，支持react操作dom-->
+    <script type="text/javascript" src="../js/react-dom.development.js"></script>
+    <!-- 将jsx转换成js文件 -->
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+    <!--text/babel表明是jsx  -->
+    <script type="text/babel">
+        // 1.创建类式组件
+        class Weather extends React.Component{
+            // 可以将组件实例对象的属性直接在类中定义
+            state = {
+                    isHot:false,
+                    wind:'微风'
+                }
+            render(){
+                return <h1 onClick={this.changeWeather}>今天天气真{this.state.isHot?"炎热":"凉爽"},{this.state.wind}</h1>
+            }
+            // 直接将方法写成属性赋值的样式,那么方法就放在组件实例对象上了
+            // 使用箭头函数,this就会向外找就是组件实例对象（结构上的向外查找，class中的this就是实例对象）
+            changeWeather = ()=>{
+                const isHot = this.state.isHot
+                this.setState({isHot:!isHot})
+            }
+        }
+        // 2.渲染虚拟DOM到页面
+        ReactDOM.render(<Weather/>,document.getElementById('test'))
+
+    </script> 
+    <!-- 总结:
+    1. 组件类中的方法我们一般做绑定事件使用---要用赋值语句+箭头函数的方式进行定义
+    2. 组件类中的属性直接在类中定义即可 -->
+</body>
+</html>

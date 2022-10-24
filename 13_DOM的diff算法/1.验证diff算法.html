@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 容器 -->
+    <div id="test"></div>
+
+    <script type="text/javascript" src="../js/17.0.1/react.development.js"></script>
+    <script type="text/javascript" src="../js/17.0.1/react-dom.development.js"></script>
+    <script type="text/javascript" src="../js/17.0.1/babel.min.js"></script>
+
+    <script type="text/babel">
+        class Time extends React.Component{
+            state = {date: new Date()}
+            componentDidMount(){
+                setInterval(()=>{
+                    this.setState({
+                        date: new Date()
+                    })
+                },1000)
+            }
+
+            render(){
+                return(
+                    <div>
+                        <h1>hello</h1>
+                        <input type="text"/>
+                        <span>现在是：{this.state.date.toTimeString()}</span>
+                    </div>
+                )
+            }
+        }
+        ReactDOM.render(<Time/>,document.getElementById('test'))
+    </script>
+    <!-- 小结：
+        1. diff算法是根据虚拟dom来对比更新后的内容和更新前的内容的差距
+        2. diff算法的最小粒度是一个标签
+        
+         -->
+
+    
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>受控组件</title>
+</head>
+<body>
+    <!-- 容器 -->
+    <div id="test"></div>
+
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <script type="text/javascript" src="../js/react-dom.development.js"></script>
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+    <script type="text/javascript" src="../js/prop-types.js"></script>
+
+    <script type="text/babel">
+        //  <!-- 1.创建类式组件 -->
+        class Login extends React.Component{
+            // 初始化状态
+            state={
+                username:'',
+                password:''
+            }
+            handlesubmit = (event)=>{
+                event.preventDefault()//阻止默认事件，表单的提交
+                const {username,password} = this.state
+                alert(`用户名：${username}，密码：${password}`)
+            }
+            // 保存用户名到username
+            saveUsername = (event)=>{
+                this.setState({username:event.target.value})
+            }
+            // 保存
+            savePassword = (event)=>{
+                this.setState({password:event.target.value})
+            }
+            render(){
+                return(
+                    <form action="http://www.baidu.com" onSubmit={this.handlesubmit} >
+                        {/*onchange也是一个原生的事件,当内容发生改变就会调用该函数*/}
+                        用户名：<input onChange={this.saveUsername} type="text" name="username"/><br/>
+                        密码：<input onChange={this.savePassword} type="password" name="password"/><br/> 
+                        <button>登录</button>
+                    </form>
+                )
+            }
+        }
+        // <!--2.渲染虚拟DOM到页面 -->
+        ReactDOM.render(<Login/>,document.getElementById('test'))
+        
+    </script>
+    <!-- 受控组件：数据先存放在state中，再显示到页面上 -->
+
+</body>
+</html> 

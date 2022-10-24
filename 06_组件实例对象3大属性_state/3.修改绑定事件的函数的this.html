@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .header{
+            background-color: orange;
+        }
+    </style>
+</head>
+<body>
+    <!-- 容器 -->
+    <div id="test"></div>
+
+    <!-- REACT ,react核心库-->
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <!-- REACTDOM ，支持react操作dom-->
+    <script type="text/javascript" src="../js/react-dom.development.js"></script>
+    <!-- 将jsx转换成js文件 -->
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+    <!--text/babel表明是jsx  -->
+    <script type="text/babel">
+        // 1.创建类式组件
+        class Weather extends React.Component{
+            constructor(props){
+                super(props)
+                // 组件实例对象上存储值（写成对象）
+                this.state = {
+                    isHot:false
+                }
+
+                // 利用bind修改changeWeather的this并且将返回的新函数赋值给定义的changeWeather2(bind返回一个新的函数)
+                // changeWeather2是在实例对象上的
+                this.changeWeather2 = this.changeWeather.bind(this)
+
+            }
+            render(){
+                return <h1 onClick={this.changeWeather2}>今天天气真{this.state.isHot?"炎热":"凉爽"}</h1>
+            }
+            changeWeather(){
+                // 类的方法放在类的原型对象上，所以changeWeather放在Weather的原型对象上
+                // 所以如果通过Weather的实例对象调用changeWeather时，changeWeather的实例对象就是Weather的实例对象
+                // 由于类中的方法默认开启严格模式，所以如果是直接调用函数（即不使用实例对象调用）那么this就是undefine
+                // 按<h1 onClick={this.changeWeather}>的写法，是将实例对象的方法赋值给onClick，所以如果点击后再调用的话就是直接调用，this就是undefined
+                    // 并且类中的方法默认开启了局部严格模式，所以changeWeather中的this是undefined
+                // 所以进行修改，在构造函数中进行设置this.changeWeather2 = this.changeWeather.bind(this)
+                console.log(this);
+            }
+
+        }
+        // 2.渲染虚拟DOM到页面
+        ReactDOM.render(<Weather/>,document.getElementById('test'))
+
+        // function changeWeather(){
+        //     console.log('修改isHot')
+        //     // babel开启严格模式，this指向是undefined,所以放在外面不可取，放在类中作为方法使用
+        // }
+
+    </script> 
+</body>
+</html>

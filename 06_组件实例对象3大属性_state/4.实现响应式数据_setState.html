@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .header{
+            background-color: orange;
+        }
+    </style>
+</head>
+<body>
+    <!-- 容器 -->
+    <div id="test"></div>
+
+    <!-- REACT ,react核心库-->
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <!-- REACTDOM ，支持react操作dom-->
+    <script type="text/javascript" src="../js/react-dom.development.js"></script>
+    <!-- 将jsx转换成js文件 -->
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+    <!--text/babel表明是jsx  -->
+    <script type="text/babel">
+        // 1.创建类式组件
+        class Weather extends React.Component{
+            constructor(props){
+                super(props)
+                // 组件实例对象上存储值（写成对象）
+                this.state = {
+                    isHot:false,
+                    wind:'微风'
+                }
+
+                // 修改changeWeather的this并且赋值给定义的changeWeather(bind返回一个新的函数)
+                // 这里定义的 this.changeWeather是在实例对象上的
+                this.changeWeather = this.changeWeather.bind(this)
+
+            }
+            render(){
+                return <h1 onClick={this.changeWeather}>今天天气真{this.state.isHot?"炎热":"凉爽"},{this.state.wind}</h1>
+            }
+            // 这里定义的 changeWeather是在类的原型对象上的
+            changeWeather(){
+
+                // 如果直接修改数据实现不了响应式数据
+                // this.state.isHot = !this.state.isHot错误写法
+
+                //  使用setState()才能实现数据的响应式,该方法是React.Component原型对象上的方法
+                // setState()的参数是对象
+                // setState()只是修改某个属性值， 不会修改其他属性值
+                const isHot = this.state.isHot
+                this.setState({isHot:!isHot})
+
+            }
+
+        }
+        // 2.渲染虚拟DOM到页面
+        ReactDOM.render(<Weather/>,document.getElementById('test'))
+
+    </script> 
+    <!-- setState总结:
+        1.构造器调用1次
+        2.render调用n+1次(n代表状态更新的次数，1是第一次渲染的时候进行调用)
+        3.数据是进行修改,而不是覆盖 -->
+</body>
+</html>

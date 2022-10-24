@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .header{
+            background-color: orange;
+        }
+    </style>
+</head>
+<body>
+    <!-- 容器 -->
+    <div id="test"></div>
+    <div id="test2"></div>
+    <div id="test3"></div>
+
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <script type="text/javascript" src="../js/react-dom.development.js"></script>
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+    <script type="text/javascript" src="../js/prop-types.js"></script>
+    <script type="text/babel">
+        // 1.创建函数式组件
+        function Person(props){
+            return(
+                    <ul>
+                        <li>姓名:{props.name}</li>
+                        <li>年龄:{props.age}</li>
+                        <li>性别:{props.sex}</li>
+                    </ul>
+                )
+        }
+        // 对属性进行限制
+        Person.propTypes={
+            // 名字必须指定而且是字符串
+            name: PropTypes.string.isRequired,
+            sex: PropTypes.string,
+            age: PropTypes.number,
+            speak: PropTypes.func
+        }
+        // 属性默认值
+        Person.defaultProps={
+            sex:'男',
+            age:18
+        }
+
+        // 2.渲染虚拟DOM到页面
+        ReactDOM.render(<Person name='yang' age={20} sex='nv'/>,document.getElementById('test'))
+        ReactDOM.render(<Person name='zhe' age={21} sex='nan'/>,document.getElementById('test2'))
+        ReactDOM.render(<Person name='ming' age={22} sex='nv'/>,document.getElementById('test3'))
+
+
+
+    </script> 
+    <!-- 总结:
+    1. 函数式组件只能使用props，直接通过参数进行使用
+    2. 也可以进行限制 -->
+</body>
+</html>

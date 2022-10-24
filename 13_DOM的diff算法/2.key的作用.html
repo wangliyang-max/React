@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 容器 -->
+    <div id="test"></div>
+
+    <script type="text/javascript" src="../js/17.0.1/react.development.js"></script>
+    <script type="text/javascript" src="../js/17.0.1/react-dom.development.js"></script>
+    <script type="text/javascript" src="../js/17.0.1/babel.min.js"></script>
+
+    <script type="text/babel">
+        class Person extends React.Component{
+            state = {
+                persons:[
+                    {id:1,name:'yang',age:19},
+                    {id:2,name:'cheng',age:20},
+                    {id:3,name:'wang',age:19}
+                ]
+            }
+            add = ()=>{
+                const {persons} = this.state
+                const p ={ id:persons.length+1, name:'小王', age: 20}
+                this.setState({persons:[p, ...persons]})
+            }
+            render(){
+                return(
+                <div>
+                    <h2>展示人员信息</h2>
+                    <button onClick = {this.add}>添加一个小王</button>
+                    <ul>
+                        {
+                            this.state.persons.map((person,index)=>{
+                                return <li key={index}>{person.name}---{person.age}<input/></li>
+                            })
+                        }
+                    </ul>
+                </div>
+                )
+            }
+        }
+        ReactDOM.render(<Person/>,document.getElementById('test'))
+    </script>   
+    <!-- 和vue一样 -->
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 容器 -->
+    <div id="test"></div>
+    <div id="demo">hello</div>
+
+    <!-- REACT ,react核心库-->
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <!-- REACTDOM ，支持react操作dom-->
+    <script type="text/javascript" src="../js/react-dom.development.js"></script>
+    <!-- 将jsx转换成js文件 -->
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+    <!--text/babel表明是jsx  -->
+    <script type="text/babel">
+        // 1.创建虚拟DOM
+        const VDOM = <h1 id="title"><span>Hello,React</span></h1>
+        // 2.渲染虚拟DOM到页面
+        ReactDOM.render(VDOM,document.getElementById("test"))
+
+        console.log('虚拟DOM',VDOM);
+        console.log('虚拟DOM类型',typeof VDOM);//object
+
+        const TDOM = document.getElementById("demo");
+        console.log('真实DOM', TDOM);
+        // debugger;
+
+    </script>
+
+
+<!-- 小结：
+    1. 虚拟DOM本质上就是一个object类型的对象
+    2. 虚拟DOM比较轻（身上的属性比较少）， 因为虚拟DOM只是React内部在使用
+    3. 虚拟DOM最终会转换成真实DOM       -->
+    
+</body>
+</html>

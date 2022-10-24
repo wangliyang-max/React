@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .header{
+            background-color: orange;
+        }
+    </style>
+</head>
+<body>
+    <!-- 容器 -->
+    <div id="test"></div>
+    <div id="test2"></div>
+    <div id="test3"></div>
+
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <script type="text/javascript" src="../js/react-dom.development.js"></script>
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+    <script type="text/babel">
+        // 1.创建类式组件
+        class Person extends React.Component{
+            render(){
+                const{name,age,sex} = this.props
+                return(
+                    <ul>
+                        <li>姓名:{name}</li>
+                        <li>年龄:{age}</li>
+                        <li>性别:{sex}</li>
+                    </ul>
+                )
+            }
+        }
+        // 2.渲染虚拟DOM到页面
+        const p = {name:'yang',age:20,sex:'nv'}
+        // 注意扩展运算符...不能直接给对象使用(可以直接给数组使用),即在js中...p语法是不对的,但是可以这样使用{...p}(这里的{}表示的是对象, 浅克隆复制对象)
+        // 但是在react+jsx中可以直接使用...p(注意这里的{}表示的是使用js表达式),但也仅限于标签传递属性时可以使用
+        ReactDOM.render(<Person {...p}/>,document.getElementById('test3'))
+
+    </script> 
+    <!-- 总结:
+    1. props批量传递属性是通过{...p}实现的 -->
+</body>
+</html>
