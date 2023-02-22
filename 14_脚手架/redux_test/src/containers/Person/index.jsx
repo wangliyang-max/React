@@ -41,6 +41,7 @@ class Person extends Component {
 }
 
 export default connect(
+  // 映射状态(state表示的是总的store，包括所有组件的state值)， 所以可以获取Count和Person的所有属性值
     state =>({person: state.person,
     count: state.count}),
     {addPerson}
